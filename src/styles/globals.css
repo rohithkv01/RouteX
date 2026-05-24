@@ -1,0 +1,455 @@
+/* ============================================================
+   RouteX — Red Noir Global Design System
+   ============================================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --bg-black: #000000;
+  --bg-dark: #0a0a0a;
+  --bg-elevated: #141414;
+  --bg-card: #0d0d0d;
+  --accent-red: #ef233c;
+  --accent-red-dim: rgba(239, 35, 60, 0.15);
+  --accent-red-glow: rgba(239, 35, 60, 0.4);
+  --accent-red-border: rgba(239, 35, 60, 0.3);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --gradient-angle: 0deg;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-black);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+img { max-width: 100%; }
+
+::selection { background: var(--accent-red); color: white; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-black); }
+::-webkit-scrollbar-thumb { background: rgba(239,35,60,0.4); border-radius: 3px; }
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes border-spin {
+  from { --gradient-angle: 0deg; }
+  to   { --gradient-angle: 360deg; }
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-2000px); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(239,35,60,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(239,35,60,0.7); }
+}
+
+@keyframes seat-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,35,60,0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(239,35,60,0); }
+}
+
+@keyframes ping {
+  0%    { transform: scale(1); opacity: 1; }
+  100%  { transform: scale(2); opacity: 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ticket-enter {
+  from { opacity: 0; transform: scale(0.9) rotateY(-10deg); }
+  to   { opacity: 1; transform: scale(1) rotateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   STARS BACKGROUND
+   ============================================================ */
+.stars-1 {
+  box-shadow:
+    234px 124px #fff, 654px 345px #fff, 876px 12px #fff,
+    1200px 800px #fff, 400px 1500px #fff, 1800px 200px #fff,
+    100px 1000px #fff, 900px 1900px #fff, 500px 600px #fff,
+    1400px 100px #fff, 300px 400px #fff, 1600px 1200px #fff,
+    700px 700px #fff, 1050px 500px #fff, 250px 1750px #fff,
+    1350px 650px #fff, 800px 300px #fff, 1700px 900px #fff;
+  animation: animStar 50s linear infinite;
+}
+.stars-2 {
+  box-shadow:
+    123px 456px #fff, 789px 234px #fff, 456px 890px #fff,
+    1100px 300px #fff, 200px 1200px #fff, 1500px 500px #fff,
+    600px 1700px #fff, 1300px 900px #fff, 350px 750px #fff,
+    950px 1400px #fff;
+  animation: animStar 80s linear infinite;
+}
+
+/* ============================================================
+   GLASS CARD
+   ============================================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* ============================================================
+   SHINY CTA BUTTON
+   ============================================================ */
+.shiny-cta {
+  --gradient-angle: 0deg;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  padding: 0.875rem 2rem;
+  background:
+    linear-gradient(#000, #000) padding-box,
+    conic-gradient(from var(--gradient-angle), transparent 0%, var(--accent-red) 5%, var(--accent-red) 30%, transparent 40%) border-box;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  isolation: isolate;
+  animation: border-spin 2.5s linear infinite;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: transform 0.2s ease;
+}
+.shiny-cta:hover { transform: scale(1.03); }
+.shiny-cta:active { transform: scale(0.97); }
+
+/* ============================================================
+   INPUTS — FLOATING LABEL STYLE
+   ============================================================ */
+.input-group {
+  position: relative;
+}
+.input-group input,
+.input-group select {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1rem 0.5rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-group input:focus,
+.input-group select:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(239,35,60,0.12);
+}
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group select:focus + label {
+  top: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--accent-red);
+  transform: none;
+}
+.input-flat {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-flat:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(239,35,60,0.12);
+}
+.input-flat::placeholder { color: var(--text-muted); }
+
+/* ============================================================
+   SKELETON SHIMMER
+   ============================================================ */
+.skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   BADGE
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.badge-red   { background: rgba(239,35,60,0.12); border: 1px solid rgba(239,35,60,0.3); color: #ef233c; }
+.badge-green { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; }
+.badge-yellow{ background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
+
+/* ============================================================
+   GRADIENT BLUR HEADER
+   ============================================================ */
+.gradient-blur {
+  position: fixed;
+  z-index: 40;
+  inset: 0 0 auto 0;
+  height: 100px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
+  mask-image: linear-gradient(to bottom, black 60%, transparent);
+}
+
+/* ============================================================
+   TEXT UTILITIES
+   ============================================================ */
+.font-display { font-family: var(--font-display); }
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+  color: transparent;
+}
+.text-gradient {
+  background: linear-gradient(to bottom, #fff 40%, rgba(255,255,255,0.3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-red { color: var(--accent-red); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-step {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.progress-step.active {
+  background: var(--accent-red);
+  color: white;
+}
+.progress-step.done {
+  background: rgba(239,35,60,0.2);
+  color: var(--accent-red);
+}
+
+/* ============================================================
+   SEAT MAP
+   ============================================================ */
+.seat {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  color: var(--text-secondary);
+}
+.seat:hover:not(.seat-booked) {
+  border-color: var(--accent-red);
+  background: rgba(239,35,60,0.1);
+  color: var(--accent-red);
+  transform: scale(1.08);
+}
+.seat-selected {
+  background: var(--accent-red) !important;
+  border-color: var(--accent-red) !important;
+  color: white !important;
+  animation: seat-pulse 1.5s ease infinite;
+}
+.seat-booked-male {
+  background: rgba(59,130,246,0.2);
+  border-color: rgba(59,130,246,0.5);
+  color: #93c5fd;
+  cursor: not-allowed;
+}
+.seat-booked-female {
+  background: rgba(236,72,153,0.2);
+  border-color: rgba(236,72,153,0.5);
+  color: #f9a8d4;
+  cursor: not-allowed;
+}
+.seat-booked {
+  background: rgba(100,100,100,0.15);
+  border-color: rgba(100,100,100,0.3);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   TICKET CARD (CONFIRMATION)
+   ============================================================ */
+.ticket-card {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1.5px dashed rgba(239,35,60,0.4);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  animation: ticket-enter 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.ticket-card::before,
+.ticket-card::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-black);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket-card::before { left: -13px; }
+.ticket-card::after  { right: -13px; }
+
+/* ============================================================
+   COUPON CARD
+   ============================================================ */
+.coupon-card {
+  flex-shrink: 0;
+  border: 1px solid var(--accent-red-border);
+  background: var(--accent-red-dim);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  min-width: 220px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.coupon-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(239,35,60,0.2), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.coupon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(239,35,60,0.2); }
+.coupon-card:hover::before { opacity: 1; }
+
+/* ============================================================
+   ANIMATIONS UTILITY
+   ============================================================ */
+.animate-fade-up  { animation: fade-in-up 0.6s ease-out forwards; }
+.animate-fade-in  { animation: fade-in 0.5s ease-out forwards; }
+.animate-scale-in { animation: scale-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.animate-float    { animation: float 3s ease-in-out infinite; }
+.animate-spin     { animation: spin 1s linear infinite; }
+.animate-ping     { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .seat { width: 30px; height: 30px; font-size: 8px; }
+}
