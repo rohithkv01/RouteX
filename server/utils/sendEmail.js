@@ -126,7 +126,10 @@ const sendBookingConfirmationEmail = async (to, booking) => {
 };
 
 const sendCancellationEmail = async (to, booking, refundAmount) => {
-  await safeSendMail({ — PNR: ${booking.pnr}`,
+  await safeSendMail({
+    from: process.env.EMAIL_FROM,
+    to,
+    subject: `❌ Booking Cancelled — PNR: ${booking.pnr}`,
     html: baseTemplate(`
       <div class="badge" style="background: rgba(239,35,60,0.1); color: #ef233c;">Booking Cancelled</div>
       <h2 style="margin-top: 16px;">Your booking has been cancelled</h2>
@@ -152,7 +155,10 @@ const sendCancellationEmail = async (to, booking, refundAmount) => {
 };
 
 const sendPaymentFailureEmail = async (to, name, amount) => {
-  await safeSendMail({ — RouteX`,
+  await safeSendMail({
+    from: process.env.EMAIL_FROM,
+    to,
+    subject: '⚠️ Payment Failed — RouteX',
     html: baseTemplate(`
       <h2>Payment was unsuccessful</h2>
       <p style="margin-top: 12px;">Hi ${name}, your payment of <strong style="color:#ef233c;">₹${amount}</strong> could not be processed. Please try again.</p>
